@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(225, 220, 220);
+}
+
+.header a {
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.header a:hover {
+    transform: translate(0, -10%);
+}
+
+
+@media screen and (max-width: 1200px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+  }

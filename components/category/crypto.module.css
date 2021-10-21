@@ -1,0 +1,9 @@
+.elements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.element {
+    margin: 1rem;
+}
