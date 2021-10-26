@@ -1,16 +1,16 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Cryptos from '../../components/review/cryptos'
 import Card from '../../components/ui/card'
-import { API_URL } from '../../config/config'
-import { getData } from '../../helpers/func'
-import { CryptoType } from '../../typescript/types'
+import { getClientGql, REVIEWS } from '../../graphql/queries'
+import { Props } from '../../typescript/types'
 
-const Review: NextPage = (props: any) => {
-    const data: CryptoType[]  = props.data;
+const Review: NextPage<Props> = (props) => {
+  const { reviews, loading } = props;
 
     return (
       <Card titlePage='Home Page'>
-        {data && <Cryptos list={data}/>}
+        {loading && <p>loading...</p>}
+        {reviews && <Cryptos list={reviews}/>}
       </Card>
     )
   }
@@ -18,9 +18,14 @@ const Review: NextPage = (props: any) => {
   export const getStaticProps: GetStaticProps = async() => {
 
     // @todo: change by graphql function in func file and adapt it to NextJS
-    const data: CryptoType[] | null = await getData(`${API_URL}/reviews`);
+    //const data: CryptoType[] | null = await getData(`${API_URL}/reviews`);
+
+    const client = getClientGql();
+
+    const { data, error, loading } = await client.query({query : REVIEWS }); 
+    const reviews = data.reviews;
   
-    if (!data) {
+    if (error) {
       return {
         notFound: true
       }
@@ -28,8 +33,10 @@ const Review: NextPage = (props: any) => {
   
     return {
       props: {
-        data
+        reviews,
+        loading,
       }
     }
   }
+
 export default Review

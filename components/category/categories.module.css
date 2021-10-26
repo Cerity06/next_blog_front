@@ -1,0 +1,9 @@
+.category {
+    display: flex;
+    align-items: center;
+}
+
+.category a {
+    margin: 0 0.3rem;
+}
+

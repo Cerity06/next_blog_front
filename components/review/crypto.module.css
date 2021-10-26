@@ -43,3 +43,9 @@
 .element a:hover {
     border-bottom:1px solid rgb(128, 15, 235);
 }
+
+.liens {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
